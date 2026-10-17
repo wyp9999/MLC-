@@ -258,3 +258,21 @@ body {
     50% { color: rgba(255, 215, 0, 0.3); } /* 黄色变暗 */
     100% { color: #ffd700; }
 }
+/* 1. 设置图片框的大小 */
+.logo-box {
+    width: 120px;
+    height: 70px;
+    border-radius: 8px;
+    background-size: cover;      /* 让图片铺满整个框 */
+    background-position: center; /* 图片居中 */
+}
+
+/* 2. 给星空体育贴上背景图 */
+.bg-img-1 {
+    background-image: url('mmexport1792255596540.jpg');
+}
+
+/* 3. 给九游娱乐贴上背景图 */
+.bg-img-2 {
+    background-image: url('mmexport1792255591051.jpg');
+}
