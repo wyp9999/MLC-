@@ -160,3 +160,28 @@ body {
         grid-template-columns: 1fr; /* 手机变成单列 */
     }
 }
+/* --- 金色闪烁文字特效 --- */
+.gold-flash-text {
+    margin-top: 20px; 
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 10px 20px; 
+}
+
+.gold-flash-text p {
+    font-size: 14px; 
+    font-weight: bold;
+    color: #ffd700; 
+    animation: gold-twinkle 1.5s infinite ease-in-out;
+}
+
+@keyframes gold-twinkle {
+    0%, 100% { 
+        opacity: 1; 
+        text-shadow: 0 0 8px rgba(255, 215, 0, 0.8), 0 0 15px rgba(255, 215, 0, 0.4); 
+    }
+    50% { 
+        opacity: 0.2; 
+        text-shadow: none; 
+    }
+}
