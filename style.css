@@ -277,3 +277,7 @@ body {
 .bg-img-2 {
     background-image: url('mmexport1792255591051.jpg');
 }
+/* 确保外层卡片没有内边距，让图片完全贴合边缘 */
+.side-card {
+    padding: 0 !important; 
+}
