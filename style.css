@@ -72,8 +72,7 @@ body {
 /* 左侧大 Banner */
 .hero-banner {
     flex: 2;
-    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('1792270798166.png') no-repeat center center;
-background-size: cover;
+    background: linear-gradient(135deg, #4a148c, #7b1fa2, #311b92);
     border-radius: 16px;
     padding: 40px;
     display: flex;
