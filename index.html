@@ -7,7 +7,7 @@
 </a>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>26.vg</title>
+  <title></title>
   <style>
     :root {
       --bg: #080b12; --text: #f2f5ff; --muted: #9aa4b8;
@@ -77,8 +77,8 @@
   </main>
   
   <footer class="foot">
-    <div>© <span id="year"></span> 26.vg</div>
-    <div><a href="mailto:hello@26.vg">hello@26.vg</a></div>
+    <div>© <span id="year"></span> </div>
+    <div><a href="mailto:hello@26.vg"></a></div>
   </footer>
 
   <div class="modal" id="wechatModal" hidden>
@@ -102,7 +102,7 @@
     }
     document.getElementById("year").textContent = new Date().getFullYear();
     document.getElementById("copyEmail").addEventListener("click", async function () {
-      await copyText("hello@26.vg");
+      await copyText("hello@");
       const old = this.textContent; this.textContent = "已复制 ✓";
       setTimeout(() => this.textContent = old, 1500);
     });
