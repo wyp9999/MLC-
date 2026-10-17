@@ -178,3 +178,41 @@ body {
     font-size: 24px;
     color: #666;
 }
+/* --- 手机端适配（当屏幕宽度小于 768px 时生效） --- */
+@media (max-width: 768px) {
+    /* 1. 上半部分：取消左右并排，改为上下排列 */
+    .top-section {
+        flex-direction: column; 
+    }
+
+    /* 2. 左侧紫色 Banner：允许内容自动换行，取消固定高度 */
+    .hero-banner {
+        padding: 20px;
+        min-height: 200px; /* 给一个最小高度 */
+    }
+    
+    .hero-banner h2 {
+        font-size: 24px; /* 手机端字体稍微改小一点 */
+    }
+
+    /* 3. 把那个丑丑的灰色占位图隐藏掉，不然会挡住字 */
+    .banner-image-placeholder {
+        display: none; 
+    }
+
+    /* 4. 下半部分列表：取消两列，改为单列 */
+    .list-section {
+        grid-template-columns: 1fr; /* 变成1列 */
+    }
+
+    /* 5. 列表卡片内部：允许换行，排版更舒服 */
+    .list-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    .item-content p {
+        margin-bottom: 5px;
+    }
+    }
