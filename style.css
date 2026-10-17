@@ -284,3 +284,19 @@ body {
 .side-card {
     padding: 0 !important; 
 }
+/* 让图片自动按比例完整显示，绝对不切字 */
+.full-img {
+    width: 100%;
+    height: auto !important;
+    display: block;
+    border-radius: 16px; 
+}
+
+/* 确保外层卡片彻底没有内边距，背景全透明，贴合图片 */
+.side-card {
+    padding: 0 !important;
+    background: transparent !important;
+    border: none !important;
+    height: auto !important; 
+    overflow: hidden;
+}
