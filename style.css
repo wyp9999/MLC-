@@ -138,13 +138,16 @@ body {
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.8), 0 0 15px rgba(255, 215, 0, 0.4);
 }
 
-/* 图片绝对自适应，不切字、不变形 */
+/* 图片绝对自适应，不切字、不变形（终极版） */
 .full-img {
     width: 100% !important;
-    height: auto !important;
+    height: 160px !important; /* 👈 强制高度 */
+    object-fit: cover !important; /* 👈 强制裁剪多余黑边 */
+    object-position: center !important; /* 👈 居中裁切 */
     display: block;
     border-radius: 16px;
 }
+
 
 /* ==========================================
    7. 手机端适配（手机竖屏自动变成上下单列）
