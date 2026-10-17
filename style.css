@@ -259,12 +259,13 @@ body {
     100% { color: #ffd700; }
 }
 /* 1. 设置图片框的大小 */
+/* 1. 设置图片框的大小 */
 .logo-box {
-    width: 120px;
-    height: 70px;
+    width: 100%;         /* 宽度改成 100% 铺满 */
+    height: 100px;       /* 给一个固定的高度，如果想更高可以改成 120px 或 150px */
     border-radius: 8px;
-    background-size: cover;      /* 让图片铺满整个框 */
-    background-position: center; /* 图片居中 */
+    background-size: cover;
+    background-position: center;
 }
 
 /* 2. 给星空体育贴上背景图 */
