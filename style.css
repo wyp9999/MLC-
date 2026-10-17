@@ -125,7 +125,7 @@ body {
 
 .logo-box {
     width: 100%;
-    height: 120px; /* 手机上的高度，可以自己调 */
+    height: 160px; /* 手机上的高度，可以自己调 */
     background-size: cover;
     background-position: center;
     border-radius: 8px;
