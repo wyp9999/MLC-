@@ -236,3 +236,13 @@ body {
     display: inline-block; /* 让链接区域只包裹住按钮，不占满整行 */
     width: fit-content; /* 宽度自适应内容 */
 }
+/* 让页面上的所有文字闪烁 */
+* {
+    animation: all-text-twinkle 2s infinite ease-in-out;
+}
+
+@keyframes all-text-twinkle {
+    0% { opacity: 1; }
+    50% { opacity: 0.3; } /* 0.3 是变暗的程度，数字越小闪得越厉害 */
+    100% { opacity: 1; }
+}
