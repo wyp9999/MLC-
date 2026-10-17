@@ -65,14 +65,14 @@
   <main class="page">
     <div class="brand"><b></b></div>
     <h1>把想法做成<em>能玩的东西</em>。</h1>
-    <p class="lead">26.vg 是一个独立开发者的落脚点。游戏、工具、实验，做完就放在这里。</p>
+    <p class="lead">是一个独立开发者的落脚点。游戏、工具、实验，做完就放在这里。</p>
     <div class="cta">
       <button class="btn-main" id="openWechat" type="button">加微信 <span>→</span></button>
       <button class="btn-ghost" id="copyEmail" type="button">复制邮箱</button>
     </div>
     <nav class="links">
       <a class="link" href="https://github.com/wyp9999" target="_blank">GitHub <i>↗</i></a>
-      <a class="link" href="https://x.com/" target="_blank">X (推特) <i>↗</i></a>
+      <a class="link" href="https://x.com/" target="_blank">X <i>↗</i></a>
     </nav>
   </main>
   
@@ -85,11 +85,11 @@
     <div class="modal-backdrop" data-close></div>
     <div class="modal-card" role="dialog" aria-modal="true" tabindex="-1">
       <button class="modal-close" type="button" data-close aria-label="关闭">✕</button>
-      <h2>加我微信</h2>
-      <p class="modal-tip">备注「26.vg」</p>
+      <h2>GT</h2>
+      <p class="modal-tip">」</p>
       <div class="fake-qr">二维码占位<br>以后可以换成图片</div>
       <div class="wechat-id">
-        <span>wyp9999</span> 
+        <span>GT@PAj9-1</span> 
         <button type="button" id="copyWechat">复制</button>
       </div>
     </div>
@@ -118,7 +118,7 @@
       setTimeout(() => modal.hidden = true, 220);
     }));
     document.getElementById("copyWechat").addEventListener("click", async function () {
-      await copyText("wyp9999");
+      await copyText("");
       const old = this.textContent; this.textContent = "已复制";
       setTimeout(() => this.textContent = old, 1500);
     });
