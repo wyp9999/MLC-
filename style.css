@@ -300,3 +300,31 @@ body {
     height: auto !important; 
     overflow: hidden;
 }
+/* --- 终极修复：底部列表卡片去边、铺满 --- */
+
+/* 1. 强制下面两个列表卡片去除内边距和边框 */
+.list-item {
+    padding: 0 !important;       /* 去除内边距 */
+    background: transparent !important; /* 去掉半透明背景 */
+    border: none !important;     /* 去除边框 */
+    overflow: hidden;            /* 让图片贴合圆角 */
+    border-radius: 16px;
+    
+    /* 顺便加上 3D 悬浮阴影效果 */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* 鼠标悬停时的 3D 抬升 */
+.list-item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.8), 0 0 15px rgba(255, 215, 0, 0.4);
+}
+
+/* 2. 确保里面的图片宽度 100%，自动适应高度 */
+.list-item .full-img {
+    width: 100% !important;
+    height: auto !important;
+    display: block;
+    border-radius: 16px;
+}
