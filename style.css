@@ -237,12 +237,24 @@ body {
     width: fit-content; /* 宽度自适应内容 */
 }
 /* 让页面上的所有文字闪烁 */
-* {
-    animation: all-text-twinkle 2s infinite ease-in-out;
+/* 只针对文字添加闪烁动画 */
+body {
+    animation: text-twinkle 2s infinite ease-in-out;
 }
 
-@keyframes all-text-twinkle {
-    0% { opacity: 1; }
-    50% { opacity: 0.3; } /* 0.3 是变暗的程度，数字越小闪得越厉害 */
-    100% { opacity: 1; }
+@keyframes text-twinkle {
+    0% { color: #fff; }
+    50% { color: rgba(255, 255, 255, 0.3); } /* 白色文字变暗 */
+    100% { color: #fff; }
+}
+
+/* 针对顶部的黄色公告，让它闪黄色 */
+.top-notice {
+    animation: yellow-twinkle 2s infinite ease-in-out !important;
+}
+
+@keyframes yellow-twinkle {
+    0% { color: #ffd700; }
+    50% { color: rgba(255, 215, 0, 0.3); } /* 黄色变暗 */
+    100% { color: #ffd700; }
 }
