@@ -22,7 +22,7 @@ body {
     margin-bottom: 20px;
     white-space: nowrap;
     overflow: hidden;
-    animation: twinkle 2s infinite ease-in-out;
+    animation: twinkle 1s infinite ease-in-out;
 }@keyframes twinkle {
     0% { 
         opacity: 1; 
