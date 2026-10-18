@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>导航站布局示例</title>
+    <style>
+        /* 基础重置与全局样式 */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+        body {
+            background-color: #fcf9f2; /* 浅米色背景 */
+            color: #333;
+            padding-bottom: 50px;
+        }
+
+        /* 顶部搜索栏模拟 */
+        .top-bar {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            background: #fff;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .search-box {
+            flex: 1;
+            background: #f5f5f5;
+            border-radius: 20px;
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            border: 1px solid #eee;
+        }
+        .search-box span { color: #999; margin-right: 10px; }
+
+        /* 顶部跑马灯/Banner区域 */
+        .banner-section {
+            padding: 15px;
+            text-align: center;
+        }
+        .banner-text {
+            color: #d4b98e;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        .banner-text strong { color: #e5a032; }
+        .main-banner {
+            width: 100%;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); /* 模拟图片背景 */
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 24px;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        /* 领奖横幅 */
+        .promo-bar {
+            margin: 15px;
+            background: #fff;
+            border-radius: 20px;
+            padding: 10px;
+            text-align: center;
+            color: #d32f2f;
+            font-weight: bold;
+            font-size: 14px;
+            border: 1px solid #ffeeba;
+        }
+
+        /* 分割线标题 */
+        .section-title {
+            text-align: center;
+            color: #d4b98e;
+            font-size: 16px;
+            margin: 20px 0;
+            position: relative;
+        }
+        .section-title::before, .section-title::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            width: 30px;
+            height: 1px;
+            background: #d4b98e;
+        }
+        .section-title::before { left: 20%; }
+        .section-title::after { right: 20%; }
+
+        /* 核心卡片网格布局 (CSS Grid) */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* 默认4列 */
+            gap: 10px;
+            padding: 0 15px;
+        }
+
+        /* 卡片样式 */
+        .card {
+            background: #fff;
+            border-radius: 10px;
+            padding: 10px 5px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            transition: transform 0.2s;
+        }
+        .card:hover { transform: translateY(-3px); }
+        
+        .card-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            background-color: #333; /* 占位符，实际应为img */
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 12px;
+            overflow: hidden;
+        }
+        .card-icon img { width: 100%; height: 100%; object-fit: cover; }
+        
+        .card-title {
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #1e3c72;
+        }
+        
+        .card-desc {
+            font-size: 10px;
+            color: #888;
+            margin-bottom: 10px;
+            line-height: 1.2;
+            height: 24px; /* 固定高度保持对齐 */
+            overflow: hidden;
+        }
+
+        .card-btn {
+            background: linear-gradient(to right, #e5d09e, #d4b468);
+            color: #fff;
+            border: none;
+            border-radius: 15px;
+            padding: 5px 0;
+            width: 80%;
+            font-size: 12px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* 底部功能块布局 (两列) */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            padding: 0 15px;
+        }
+        .tool-card {
+            background: #1a1a1a;
+            color: #fff;
+            border-radius: 10px;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+        }
+        .tool-card .icon {
+            width: 30px; height: 30px; background: #333; border-radius: 5px; margin-right: 10px;
+        }
+        .tool-info h4 { font-size: 14px; margin-bottom: 2px; color: #d4b468;}
+        .tool-info p { font-size: 12px; color: #999; }
+        .go-arrow { font-size: 12px; color: #999; }
+
+        /* 悬浮按钮 */
+        .float-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: #007bff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            box-shadow: 0 4px 10px rgba(0,123,255,0.4);
+            cursor: pointer;
+        }
+
+        /* 响应式设计：手机屏幕适配 (小于768px) */
+        @media (max-width: 768px) {
+            .card-grid {
+                grid-template-columns: repeat(2, 1fr); /* 手机端变为2列 */
+            }
+            .section-title::before, .section-title::after {
+                width: 15%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 搜索栏 -->
+    <div class="top-bar">
+        <div class="search-box">
+            <span>🔍</span> 搜索...
+        </div>
+        <div style="margin-left: 15px; font-size: 20px;">★</div>
+    </div>
+
+    <!-- Banner 区域 -->
+    <div class="banner-section">
+        <div class="banner-text">抖音代发视频日入 <strong>500+</strong> 添加旺旺</div>
+        <div class="main-banner">
+            相信品牌的力量
+        </div>
+    </div>
+
+    <!-- 横幅公告 -->
+    <div class="promo-bar">
+        领取扶持新人水旺旺: 3288888 (示例)
+    </div>
+
+    <!-- 游戏网格区块 -->
+    <div class="section-title">热门游戏</div>
+    <div class="card-grid">
+        <!-- 第一张卡片示例 -->
+        <div class="card">
+            <div class="card-icon">LOGO</div>
+            <div class="card-title">非凡娱乐</div>
+            <div class="card-desc">新人水注册领取88个鸡蛋</div>
+            <button class="card-btn">进入</button>
+        </div>
+        <!-- 复制卡片，这里为了演示复制了3个 -->
+        <div class="card">
+            <div class="card-icon">LOGO</div>
+            <div class="card-title">赏金国际</div>
+            <div class="card-desc">新人水注册领取88个鸡蛋</div>
+            <button class="card-btn">进入</button>
+        </div>
+        <div class="card">
+            <div class="card-icon">LOGO</div>
+            <div class="card-title">问鼎娱乐</div>
+            <div class="card-desc">新人水注册领取88个鸡蛋</div>
+            <button class="card-btn">进入</button>
+        </div>
+        <div class="card">
+            <div class="card-icon">LOGO</div>
+            <div class="card-title">戴高乐</div>
+            <div class="card-desc">新人水注册领取88个鸡蛋</div>
+            <button class="card-btn">进入</button>
+        </div>
+    </div>
+
+    <!-- 底部实用工具 -->
+    <div class="section-title">实用工具与站点功能</div>
+    <div class="tools-grid">
+        <div class="tool-card">
+            <div style="display:flex; align-items:center;">
+                <div class="icon"></div>
+                <div class="tool-info">
+                    <h4>PG 模拟器</h4>
+                    <p>点击进入</p>
+                </div>
+            </div>
+            <div class="go-arrow">GO ></div>
+        </div>
+        <div class="tool-card">
+            <div style="display:flex; align-items:center;">
+                <div class="icon"></div>
+                <div class="tool-info">
+                    <h4>虚拟币教程</h4>
+                    <p>点击进入</p>
+                </div>
+            </div>
+            <div class="go-arrow">GO ></div>
+        </div>
+        <div class="tool-card">
+            <div style="display:flex; align-items:center;">
+                <div class="icon"></div>
+                <div class="tool-info">
+                    <h4>VPN</h4>
+                    <p>点击进入</p>
+                </div>
+            </div>
+            <div class="go-arrow">GO ></div>
+        </div>
+        <div class="tool-card">
+            <div style="display:flex; align-items:center;">
+                <div class="icon"></div>
+                <div class="tool-info">
+                    <h4>测试分类</h4>
+                    <p>无风险不受监管的浏览器</p>
+                </div>
+            </div>
+            <div class="go-arrow">GO ></div>
+        </div>
+    </div>
+
+    <!-- 悬浮客服按钮 -->
+    <div class="float-btn">💬</div>
+
+</body>
+  </html>
