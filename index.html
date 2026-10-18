@@ -1,127 +1,320 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <!-- 这是你刚上传的图片，点击会跳转 -->
-<a href="http://www.968j9.com" target="_blank">
-  <img src="banner.jpg" alt="J9娱乐" style="width: 100%; max-width: 600px; border-radius: 12px; margin-bottom: 24px;">
-</a>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title></title>
-  <style>
-    :root {
-      --bg: #080b12; --text: #f2f5ff; --muted: #9aa4b8;
-      --line: rgba(255, 255, 255, 0.14); --accent: #6ee7ff; --accent2: #a78bfa;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { height: 100%; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
-      color: var(--text); background: radial-gradient(900px 520px at 18% -15%, rgba(110, 231, 255, 0.20), transparent 62%), radial-gradient(820px 520px at 88% 6%, rgba(167, 139, 250, 0.20), transparent 62%), var(--bg);
-      min-height: 100vh; display: flex; flex-direction: column;
-    }
-    body::before {
-      content: ""; position: fixed; inset: 0; pointer-events: none;
-      background-image: linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
-      background-size: 64px 64px; mask-image: radial-gradient(ellipse at 50% 40%, #000 20%, transparent 78%);
-      -webkit-mask-image: radial-gradient(ellipse at 50% 40%, #000 20%, transparent 78%);
-    }
-    .page { position: relative; z-index: 1; width: min(760px, 100%); margin: auto; padding: 40px 24px; display: flex; flex-direction: column; align-items: flex-start; }
-    .brand { font-size: 15px; font-weight: 700; letter-spacing: 0.16em; color: var(--muted); margin-bottom: 44px; animation: rise 0.7s ease both; }
-    .brand b { color: var(--text); }
-    h1 { font-size: clamp(38px, 8vw, 76px); line-height: 1.02; letter-spacing: -0.045em; font-weight: 850; margin-bottom: 22px; max-width: 15em; animation: rise 0.7s 0.06s ease both; }
-    h1 em { font-style: normal; background: linear-gradient(96deg, var(--accent), var(--accent2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
-    .lead { font-size: clamp(16px, 2.3vw, 19px); line-height: 1.75; color: var(--muted); max-width: 34em; margin-bottom: 38px; animation: rise 0.7s 0.12s ease both; }
-    .cta { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; animation: rise 0.7s 0.18s ease both; }
-    .btn-main { display: inline-flex; align-items: center; gap: 10px; padding: 15px 26px; border-radius: 999px; font-size: 16px; font-weight: 700; color: #071018; text-decoration: none; border: none; cursor: pointer; font-family: inherit; background: linear-gradient(135deg, var(--accent), var(--accent2)); box-shadow: 0 12px 34px -12px rgba(110, 231, 255, 0.6); transition: transform 0.2s ease; }
-    .btn-main:hover { transform: translateY(-2px); }
-    .btn-ghost { display: inline-flex; align-items: center; gap: 8px; padding: 15px 22px; border-radius: 999px; font-size: 15px; font-weight: 600; color: var(--text); background: rgba(255, 255, 255, 0.05); border: 1px solid var(--line); cursor: pointer; font-family: inherit; transition: background 0.2s ease; }
-    .links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; animation: rise 0.7s 0.24s ease both; }
-    .link { display: inline-flex; align-items: center; gap: 7px; padding: 10px 16px; border-radius: 999px; font-size: 14px; font-weight: 600; color: var(--muted); text-decoration: none; border: 1px solid var(--line); background: rgba(255, 255, 255, 0.03); transition: 0.2s; }
-    .link:hover { color: var(--text); border-color: rgba(110, 231, 255, 0.45); transform: translateY(-2px); }
-    .link i { font-style: normal; font-size: 12px; color: var(--accent); opacity: 0.85; }
-    .foot { position: relative; z-index: 1; width: min(760px, 100%); margin: 0 auto; padding: 0 24px 34px; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-size: 13px; color: var(--muted); animation: rise 0.7s 0.3s ease both; }
-    .foot a { color: var(--muted); text-decoration: none; }
-    .modal { position: fixed; inset: 0; z-index: 50; display: grid; place-items: center; padding: 24px; }
-    .modal[hidden] { display: none; }
-    .modal-backdrop { position: absolute; inset: 0; background: rgba(4, 7, 12, 0.72); backdrop-filter: blur(10px); opacity: 0; transition: opacity 0.22s ease; }
-    .modal-card { position: relative; width: min(340px, 100%); padding: 26px 24px 22px; border-radius: 24px; border: 1px solid var(--line); background: linear-gradient(180deg, rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0.045)); box-shadow: 0 40px 90px -30px rgba(0, 0, 0, 0.9); text-align: center; opacity: 0; transform: translateY(12px) scale(0.97); transition: 0.22s; }
-    .modal.open .modal-backdrop { opacity: 1; }
-    .modal.open .modal-card { opacity: 1; transform: none; }
-    .modal-close { position: absolute; top: 12px; right: 12px; width: 34px; height: 34px; display: grid; place-items: center; border-radius: 50%; border: 1px solid var(--line); background: rgba(255, 255, 255, 0.06); color: var(--muted); cursor: pointer; }
-    .modal-card h2 { font-size: 18px; font-weight: 750; margin-bottom: 6px; }
-    .modal-tip { font-size: 13px; color: var(--muted); margin-bottom: 18px; }
-    .fake-qr { width: 100%; aspect-ratio: 1 / 1; border-radius: 16px; background: rgba(0,0,0,0.2); border: 1px dashed rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; color: var(--muted); font-size: 13px; margin-bottom: 16px; padding: 20px; text-align: center; }
-    .wechat-id { display: flex; align-items: center; justify-content: space-between; gap: 10px; background: rgba(0,0,0,0.3); padding: 10px 16px; border-radius: 12px; border: 1px solid var(--line); }
-    .wechat-id span { font-family: monospace; color: var(--text); font-size: 15px; font-weight: bold; }
-    .wechat-id button { padding: 6px 12px; border-radius: 99px; border: none; background: var(--accent); color: #000; font-size: 12px; font-weight: bold; cursor: pointer; }
-    @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
-    @media (max-width: 560px) {
-      .page { padding: 32px 20px; } .brand { margin-bottom: 32px; } .cta { width: 100%; flex-direction: column; align-items: stretch; } .btn-main, .btn-ghost { justify-content: center; }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>导航站布局示例</title>
+    <style>
+        /* 基础重置与全局样式 */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+        body {
+            background-color: #fcf9f2; /* 浅米色背景 */
+            color: #333;
+            padding-bottom: 50px;
+        }
+
+        /* 顶部搜索栏模拟 */
+        .top-bar {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            background: #fff;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .search-box {
+            flex: 1;
+            background: #f5f5f5;
+            border-radius: 20px;
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            border: 1px solid #eee;
+        }
+        .search-box span { color: #999; margin-right: 10px; }
+
+        /* 顶部跑马灯/Banner区域 */
+        .banner-section {
+            padding: 15px;
+            text-align: center;
+        }
+        .banner-text {
+            color: #d4b98e;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        .banner-text strong { color: #e5a032; }
+        .main-banner {
+            width: 100%;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); /* 模拟图片背景 */
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 24px;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        /* 领奖横幅 */
+        .promo-bar {
+            margin: 15px;
+            background: #fff;
+            border-radius: 20px;
+            padding: 10px;
+            text-align: center;
+            color: #d32f2f;
+            font-weight: bold;
+            font-size: 14px;
+            border: 1px solid #ffeeba;
+        }
+
+        /* 分割线标题 */
+        .section-title {
+            text-align: center;
+            color: #d4b98e;
+            font-size: 16px;
+            margin: 20px 0;
+            position: relative;
+        }
+        .section-title::before, .section-title::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            width: 30px;
+            height: 1px;
+            background: #d4b98e;
+        }
+        .section-title::before { left: 20%; }
+        .section-title::after { right: 20%; }
+
+        /* 核心卡片网格布局 (CSS Grid) */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* 默认4列 */
+            gap: 10px;
+            padding: 0 15px;
+        }
+
+        /* 卡片样式 */
+        .card {
+            background: #fff;
+            border-radius: 10px;
+            padding: 10px 5px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            transition: transform 0.2s;
+        }
+        .card:hover { transform: translateY(-3px); }
+        
+        .card-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            background-color: #333; /* 占位符，实际应为img */
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 12px;
+            overflow: hidden;
+        }
+        .card-icon img { width: 100%; height: 100%; object-fit: cover; }
+        
+        .card-title {
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #1e3c72;
+        }
+        
+        .card-desc {
+            font-size: 10px;
+            color: #888;
+            margin-bottom: 10px;
+            line-height: 1.2;
+            height: 24px; /* 固定高度保持对齐 */
+            overflow: hidden;
+        }
+
+        .card-btn {
+            background: linear-gradient(to right, #e5d09e, #d4b468);
+            color: #fff;
+            border: none;
+            border-radius: 15px;
+            padding: 5px 0;
+            width: 80%;
+            font-size: 12px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* 底部功能块布局 (两列) */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            padding: 0 15px;
+        }
+        .tool-card {
+            background: #1a1a1a;
+            color: #fff;
+            border-radius: 10px;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+        }
+        .tool-card .icon {
+            width: 30px; height: 30px; background: #333; border-radius: 5px; margin-right: 10px;
+        }
+        .tool-info h4 { font-size: 14px; margin-bottom: 2px; color: #d4b468;}
+        .tool-info p { font-size: 12px; color: #999; }
+        .go-arrow { font-size: 12px; color: #999; }
+
+        /* 悬浮按钮 */
+        .float-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: #007bff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            box-shadow: 0 4px 10px rgba(0,123,255,0.4);
+            cursor: pointer;
+        }
+
+        /* 响应式设计：手机屏幕适配 (小于768px) */
+        @media (max-width: 768px) {
+            .card-grid {
+                grid-template-columns: repeat(2, 1fr); /* 手机端变为2列 */
+            }
+            .section-title::before, .section-title::after {
+                width: 15%;
+            }
+        }
+    </style>
 </head>
 <body>
-  <main class="page">
-    <div class="brand"><b></b></div>
-    <h1>把想法做成<em>能玩的东西</em>。</h1>
-    <p class="lead">是一个独立开发者的落脚点。游戏、工具、实验，做完就放在这里。</p>
-    <div class="cta">
-      <button class="btn-main" id="openWechat" type="button">加微信 <span>→</span></button>
-      <button class="btn-ghost" id="copyEmail" type="button">复制邮箱</button>
-    </div>
-    <nav class="links">
-      <a class="link" href="https://github.com/wyp9999" target="_blank">GitHub <i>↗</i></a>
-      <a class="link" href="https://x.com/" target="_blank">X <i>↗</i></a>
-    </nav>
-  </main>
-  
-  <footer class="foot">
-    <div>© <span id="year"></span> </div>
-    <div><a href="mailto:hello@九游会J9.PA直营百家乐.电子游戏.体育赛事"></a></div>
-  </footer>
 
-  <div class="modal" id="wechatModal" hidden>
-    <div class="modal-backdrop" data-close></div>
-    <div class="modal-card" role="dialog" aria-modal="true" tabindex="-1">
-      <button class="modal-close" type="button" data-close aria-label="关闭">✕</button>
-      <h2>GT</h2>
-      <p class="modal-tip">」</p>
-      <div class="fake-qr">二维码占位<br>以后可以换成图片</div>
-      <div class="wechat-id">
-        <span>GT@PAj9-1</span> 
-        <button type="button" id="copyWechat">复制</button>
-      </div>
+    <!-- 搜索栏 -->
+    <div class="top-bar">
+        <div class="search-box">
+            <span>🔍</span> 搜索...
+        </div>
+        <div style="margin-left: 15px; font-size: 20px;">★</div>
     </div>
-  </div>
 
-  <script>
-    async function copyText(text) {
-      try { await navigator.clipboard.writeText(text); return true; } 
-      catch { const ta = document.createElement("textarea"); ta.value = text; document.body.appendChild(ta); ta.select(); document.execCommand("copy"); ta.remove(); return true; }
-    }
-    document.getElementById("year").textContent = new Date().getFullYear();
-    document.getElementById("copyEmail").addEventListener("click", async function () {
-      await copyText("hello@");
-      const old = this.textContent; this.textContent = "已复制 ✓";
-      setTimeout(() => this.textContent = old, 1500);
-    });
-    const modal = document.getElementById("wechatModal");
-    const card = modal.querySelector(".modal-card");
-    document.getElementById("openWechat").addEventListener("click", () => {
-      modal.hidden = false; document.body.style.overflow = "hidden";
-      requestAnimationFrame(() => modal.classList.add("open"));
-      card.focus();
-    });
-    modal.querySelectorAll("[data-close]").forEach(el => el.addEventListener("click", () => {
-      modal.classList.remove("open"); document.body.style.overflow = "";
-      setTimeout(() => modal.hidden = true, 220);
-    }));
-    document.getElementById("copyWechat").addEventListener("click", async function () {
-      await copyText("");
-      const old = this.textContent; this.textContent = "已复制";
-      setTimeout(() => this.textContent = old, 1500);
-    });
-  </script>
+    <!-- Banner 区域 -->
+    <div class="banner-section">
+        <div class="banner-text">抖音代发视频日入 <strong>500+</strong> 添加旺旺</div>
+        <div class="main-banner">
+            相信品牌的力量
+        </div>
+    </div>
+
+    <!-- 横幅公告 -->
+    <div class="promo-bar">
+        领取扶持新人水旺旺: 3288888 (示例)
+    </div>
+
+    <!-- 游戏网格区块 -->
+    <div class="section-title">热门游戏</div>
+    <div class="card-grid">
+        <!-- 第一张卡片示例 -->
+        <div class="card">
+            <div class="card-icon">LOGO</div>
+            <div class="card-title">非凡娱乐</div>
+            <div class="card-desc">新人水注册领取88个鸡蛋</div>
+            <button class="card-btn">进入</button>
+        </div>
+        <!-- 复制卡片，这里为了演示复制了3个 -->
+        <div class="card">
+            <div class="card-icon">LOGO</div>
+            <div class="card-title">赏金国际</div>
+            <div class="card-desc">新人水注册领取88个鸡蛋</div>
+            <button class="card-btn">进入</button>
+        </div>
+        <div class="card">
+            <div class="card-icon">LOGO</div>
+            <div class="card-title">问鼎娱乐</div>
+            <div class="card-desc">新人水注册领取88个鸡蛋</div>
+            <button class="card-btn">进入</button>
+        </div>
+        <div class="card">
+            <div class="card-icon">LOGO</div>
+            <div class="card-title">戴高乐</div>
+            <div class="card-desc">新人水注册领取88个鸡蛋</div>
+            <button class="card-btn">进入</button>
+        </div>
+    </div>
+
+    <!-- 底部实用工具 -->
+    <div class="section-title">实用工具与站点功能</div>
+    <div class="tools-grid">
+        <div class="tool-card">
+            <div style="display:flex; align-items:center;">
+                <div class="icon"></div>
+                <div class="tool-info">
+                    <h4>PG 模拟器</h4>
+                    <p>点击进入</p>
+                </div>
+            </div>
+            <div class="go-arrow">GO ></div>
+        </div>
+        <div class="tool-card">
+            <div style="display:flex; align-items:center;">
+                <div class="icon"></div>
+                <div class="tool-info">
+                    <h4>虚拟币教程</h4>
+                    <p>点击进入</p>
+                </div>
+            </div>
+            <div class="go-arrow">GO ></div>
+        </div>
+        <div class="tool-card">
+            <div style="display:flex; align-items:center;">
+                <div class="icon"></div>
+                <div class="tool-info">
+                    <h4>VPN</h4>
+                    <p>点击进入</p>
+                </div>
+            </div>
+            <div class="go-arrow">GO ></div>
+        </div>
+        <div class="tool-card">
+            <div style="display:flex; align-items:center;">
+                <div class="icon"></div>
+                <div class="tool-info">
+                    <h4>测试分类</h4>
+                    <p>无风险不受监管的浏览器</p>
+                </div>
+            </div>
+            <div class="go-arrow">GO ></div>
+        </div>
+    </div>
+
+    <!-- 悬浮客服按钮 -->
+    <div class="float-btn">💬</div>
+
 </body>
 </html>
